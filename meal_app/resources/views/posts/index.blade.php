@@ -9,6 +9,9 @@
                             {{ $post->title }}</h2>
                         <h3>{{ $post->user->name }}</h3>
                         <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
+                        <span>{{ $post->created_at->diffForHumans() }}</span>
+                        </p>
+                        <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
                             <span
                                 class="text-red-400 font-bold">{{ date('Y-m-d H:i:s', strtotime('-1 day')) < $post->created_at ? 'NEW' : '' }}</span>
                             {{ $post->created_at }}

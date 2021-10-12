@@ -40,9 +40,7 @@ class Post extends Model
     public function getImageUrlAttribute()
     {
         return Storage::url($this->image_path);
-        
     }
-
 
     
 }

@@ -15,17 +15,21 @@ class CreateLikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-            $table->foreignId('post_id')
-                ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+            $table->unsignedBigInteger('post_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            // $table->id();
+            // $table->foreignId('user_id')
+            //     ->constrained()
+            //     ->cascadeOnUpdate()
+            //     ->cascadeOnDelete();
+            // $table->foreignId('post_id')
+            //     ->constrained()
+            //     ->cascadeOnUpdate()
+            //     ->cascadeOnDelete();
 
             // $table->integer('post_id')->unsigned()->default(1)
             //     ->foreign('post_id')->references('id')->on('posts')->onDelete('restrict');
+            
         });
     }
 

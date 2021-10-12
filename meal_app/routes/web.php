@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\LikeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +15,7 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', [PostController::class, 'index'])
-     ->name('root');
+    ->name('root');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,4 +28,9 @@ Route::resource('posts', PostController::class)
 Route::resource('posts', PostController::class)
     ->only(['show', 'index']);
 
-require __DIR__.'/auth.php';
+// Route::get('/reply/like/{post}', 'LikeController@like')->name('like');
+Route::get('/reply/like/{post}', [LikeController::class, 'like'])->name('like');
+// Route::get('/reply/like/{post}', 'LikeController@unlike')->name('unlike');
+Route::get('/reply/unlike/{post}', [LikeController::class, 'unlike'])->name('unlike');
+
+require __DIR__ . '/auth.php';
