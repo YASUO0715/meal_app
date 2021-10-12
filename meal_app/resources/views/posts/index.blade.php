@@ -9,7 +9,7 @@
                             {{ $post->title }}</h2>
                         <h3>{{ $post->user->name }}</h3>
                         <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
-                        <span>{{ $post->created_at->diffForHumans() }}</span>
+                            <span>{{ $post->created_at->diffForHumans() }}</span>
                         </p>
                         <p class="text-sm mb-2 md:text-base font-normal text-gray-600">
                             <span

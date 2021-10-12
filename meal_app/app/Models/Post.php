@@ -14,7 +14,7 @@ class Post extends Model
         'title',
         'body',
         'category_id',
-        
+
     ];
 
     public function user()
@@ -41,6 +41,4 @@ class Post extends Model
     {
         return Storage::url($this->image_path);
     }
-
-    
 }
