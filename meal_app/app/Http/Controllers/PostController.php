@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Like;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -84,8 +85,13 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        $like = Like::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
-        return view('posts.show', compact('post', 'like'));
+        if (Auth::check()){
+            $like = Like::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
+            return view('posts.show', compact('post', 'like'));
+        }else{
+            return view('posts.show', compact('post'));
+        }
+        
         
     }
 

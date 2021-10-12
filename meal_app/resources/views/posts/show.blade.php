@@ -31,6 +31,7 @@
             {{-- <img src="{{ asset('img/likebutton.png') }}" width="30px"> --}}
 
             <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
+@if (Auth::check())
             @if ($like)
                 <!-- 「いいね」取消用ボタンを表示 -->
                 <a href="{{ route('unlike', $post) }}">
@@ -51,11 +52,12 @@
                 <!-- 「いいね」の数を表示 -->
                 <span class="badge">
                     <b>{{ $post->likes->count() }}</b>
+@endif                
                 </span>
 
             @endif
-        </span>
 
+        </span>
 
 
         <div class="flex flex-row text-center my-4">
