@@ -10,8 +10,8 @@
 ## テーブル定義
 ---
 * categoriesテーブル・・・食事の栄養成分情報が含まれるの食事のカテゴリ情報を格納
-* Postsテーブル・・・各投稿の情報を格納、categoriestableへの外部キーあり
-* Likesテーブル・・・poststable,Userstableへの外部キーあり
+* postsテーブル・・・各投稿の情報を格納、categoriestableへの外部キーあり
+* likesテーブル・・・poststable,Userstableへの外部キーあり
 
 
 ## 実装機能

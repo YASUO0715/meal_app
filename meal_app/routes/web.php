@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LikeController;
+use GuzzleHttp\Middleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +31,8 @@ Route::resource('posts', PostController::class)
     ->only(['show', 'index']);
 
 Route::resource('posts.likes', LikeController::class)
-    ->only(['store', 'destroy']);
+    ->only(['store', 'destroy'])
+    ->middleware('auth');
 
 
 

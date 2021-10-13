@@ -39,7 +39,7 @@ class PostFactory extends Factory
             'title' => $this->faker->word(),
             'body' => $this->faker->paragraph(),
             'image' => $fileName,
-            'user_id' => optional(User::inRandomOrder()->first())->id,
+            'user_id' => (User::inRandomOrder()->first())->id,
             'category_id' => Arr::random(Arr::pluck(Category::All(), 'id')),
         ];
     }
