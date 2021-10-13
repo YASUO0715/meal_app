@@ -1,18 +1,7 @@
 <x-app-layout>
     <div class="container lg:w-3/4 md:w-4/5 w-11/12 mx-auto my-8 px-8 py-4 bg-white shadow-md">
         <x-flash-message :message="session('notice')" />
-        @if ($errors->any())
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 my-2" role="alert">
-                <p>
-                    <b>{{ count($errors) }}件のエラーがあります。</b>
-                </p>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
         <article class="mb-2">
             <h2 class="font-bold font-sans break-normal text-gray-900 pt-6 pb-1 text-3xl md:text-4xl">
                 {{ $post->title }}</h2>
@@ -31,31 +20,42 @@
             {{-- <img src="{{ asset('img/likebutton.png') }}" width="30px"> --}}
 
             <!-- もし$likeがあれば＝ユーザーが「いいね」をしていたら -->
-@if (Auth::check())
-            @if ($like)
-                <!-- 「いいね」取消用ボタンを表示 -->
-                <a href="{{ route('unlike', $post) }}">
-                    <button type="button" class="btn btn-warning">お気に入解除</button><br>
-                </a>
-                <b>お気に入り数:</b>
-                <!-- 「いいね」の数を表示 -->
-                <span class="badge">
-                    <b>{{ $post->likes->count() }}</b>
-                </span>
+            @if (Auth::check())
+                @if (!empty($like))
+                    <!-- 「いいね」取消用ボタンを表示 -->
 
-            @else
-                <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
-                <a href="{{ route('like', $post) }}" class="btn btn-secondary btn-sm">
-                    <button type="button" class="btn btn-warning">お気に入登録</button><br>
-                </a>
-                <b>お気に入り数:</b>
-                <!-- 「いいね」の数を表示 -->
-                <span class="badge">
-                    <b>{{ $post->likes->count() }}</b>
-@endif                
-                </span>
+                    {{-- <a href="{{ route('posts.likes.destroy', [$post,$like]) }}">
+                        <button type="button" class="btn btn-warning">お気に入解除</button><br>
+                    </a> --}}
+                    <form action="{{ route('posts.likes.destroy', [$post, $like]) }}" method="POST"
+                        class="mt-2">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="bg-pink-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-100">お気に入解除</button><br><br>
+                    </form>
+                    <b>お気に入り数:</b>
+                    <!-- 「いいね」の数を表示 -->
+                    <span class="badge">
+                        <b>{{ $post->likes->count() }}</b>
+                    </span>
 
-            @endif
+                @else
+                    <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                    {{-- <a href="{{ route('posts.likes.store', $post) }}" class="btn btn-secondary btn-sm">
+                        <button type="button" class="btn btn-warning">お気に入登録</button><br>
+                    </a> --}}
+                    <form action="{{ route('posts.likes.store', $post) }}" method="POST" class="mt-2">
+                        @csrf
+                        <button type="submit" class="bg-pink-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-100">お気に入登録</button><br><br>
+                    </form>
+                    <b>お気に入り数:</b>
+                    <!-- 「いいね」の数を表示 -->
+                    <span class="badge">
+                        <b>{{ $post->likes->count() }}</b>
+                @endif
+        </span>
+
+        @endif
 
         </span>
 

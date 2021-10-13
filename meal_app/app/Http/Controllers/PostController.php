@@ -43,11 +43,8 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = new Post($request->all());
-        // $post = new Category($request->all());
         $category_id = $request->category_id;
-
         $post->user_id = $request->user()->id;
-        // $post->category_id = $request->category()->id;
         $post->category_id = $request->category_id;
         $file = $request->file('image');
         $post->image = date('YmdHis') . '_' . $file->getClientOriginalName();

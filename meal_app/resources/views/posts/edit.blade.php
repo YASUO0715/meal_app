@@ -2,18 +2,7 @@
     <div class="container lg:w-1/2 md:w-4/5 w-11/12 mx-auto mt-8 px-8 bg-white shadow-md">
         <h2 class="text-center text-lg font-bold pt-6 tracking-widest">ブログ登録</h2>
 
-        @if ($errors->any())
-            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mx-8 my-2" role="alert">
-                <p>
-                    <b>{{ count($errors) }}件のエラーがあります。</b>
-                </p>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <x-validation-errors :messages='$errors' />
 
         <form action="{{ route('posts.update', $post) }}" method="POST" enctype="multipart/form-data"
             class="rounded pt-3 pb-8 mb-4">
@@ -32,9 +21,12 @@
                 <label class="block text-gray-700 text-sm mb-2" for="title">
                     カテゴリ
                 </label>
-                <input type="radio" name="category_id" value=1 {{ old('category_id',$post->category_id) === 1 ? 'checked' : '' }}>野菜<br>
-                <input type="radio" name="category_id" value=2 {{ old('category_id',$post->category_id) === 2 ? 'checked' : '' }}>たんぱく質<br>
-                <input type="radio" name="category_id" value=3 {{ old('category_id',$post->category_id) === 3 ? 'checked' : '' }}>炭水化物<br>
+                <input type="radio" name="category_id" value=1
+                    {{ old('category_id', $post->category_id) === 1 ? 'checked' : '' }}>野菜<br>
+                <input type="radio" name="category_id" value=2
+                    {{ old('category_id', $post->category_id) === 2 ? 'checked' : '' }}>たんぱく質<br>
+                <input type="radio" name="category_id" value=3
+                    {{ old('category_id', $post->category_id) === 3 ? 'checked' : '' }}>炭水化物<br>
             </div>
 
             <div class="mb-4">

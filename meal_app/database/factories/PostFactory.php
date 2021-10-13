@@ -31,13 +31,15 @@ class PostFactory extends Factory
         $file = $this->faker->image();
         $fileName = basename($file);
 
+
+
         Storage::putFileAs('images/posts', $file, $fileName);
         File::delete($file);
         return [
             'title' => $this->faker->word(),
             'body' => $this->faker->paragraph(),
             'image' => $fileName,
-            'user_id' => Arr::random(Arr::pluck(User::All(), 'id')),
+            'user_id' => optional(User::inRandomOrder()->first())->id,
             'category_id' => Arr::random(Arr::pluck(Category::All(), 'id')),
         ];
     }
